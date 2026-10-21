@@ -1,0 +1,28 @@
+{
+  "name": "leadnest",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite --host 0.0.0.0",
+    "build": "tsc --noEmit && vite build",
+    "typecheck": "tsc --noEmit",
+    "preview": "vite preview --host 0.0.0.0",
+    "validate": "node scripts/check-export.mjs",
+    "generate:share": "node scripts/generate-share.mjs"
+  },
+  "dependencies": {
+    "@fontsource-variable/manrope": "5.2.8",
+    "react": "19.2.0",
+    "react-dom": "19.2.0"
+  },
+  "devDependencies": {
+    "@axe-core/playwright": "^4.14.0",
+    "@types/react": "19.2.2",
+    "@types/react-dom": "19.2.2",
+    "@vitejs/plugin-react": "5.1.0",
+    "playwright": "^1.64.1",
+    "typescript": "5.9.3",
+    "vite": "7.2.2"
+  }
+}

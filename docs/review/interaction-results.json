@@ -1,0 +1,126 @@
+{
+  "passed": [
+    "Seven viewport layouts, loaded local font, valid navigation targets, exact checkout URLs",
+    "Product, price and complete primary action on the first screen at 390 × 844",
+    "All three desktop navigation links scroll to the intended sections",
+    "Mobile FAQ navigation",
+    "All five FAQs open and close using keyboard, and open using pointer; answers reflow",
+    "Axe WCAG 2 A/AA, 2.1 AA and 2.2 AA: zero violations at mobile and desktop with all FAQs open",
+    "Keyboard skip link, focus order and primary action focus indicator",
+    "Local 1200 × 630 social image and favicon load from a nested hosting path",
+    "200% root text enlargement reflows at 390px (not native browser zoom)",
+    "RTL layout mirror has no horizontal overflow at 390px (English content only)",
+    "Reduced motion removes smooth scrolling and control transitions",
+    "Primary purchase action navigates to the exact provided checkout URL (intercepted)",
+    "No console errors, missing local resources or external runtime requests"
+  ],
+  "limitations": [
+    "WebKit could not launch: browserType.launch:  ╔══════════════════════════════════════════════════════╗ ║ Host system is missing dependencies to run browsers. ║ ║ Missing libraries:                                   ║ ║     libgstreamer-1.0.so.0                            ║ ║     libgtk-4.so.1                                    ║",
+    "No physical phone, native screen reader, native 200% browser zoom, real payment or post-purchase fulfillment was tested."
+  ],
+  "viewports": [
+    {
+      "width": 320,
+      "height": 700,
+      "scrollWidth": 320,
+      "mainAction": {
+        "x": 20,
+        "y": 394.171875,
+        "width": 280,
+        "height": 56
+      }
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "scrollWidth": 390,
+      "mainAction": {
+        "x": 20,
+        "y": 371.78125,
+        "width": 350,
+        "height": 56
+      }
+    },
+    {
+      "width": 672,
+      "height": 900,
+      "scrollWidth": 672,
+      "mainAction": {
+        "x": 20,
+        "y": 371.78125,
+        "width": 632,
+        "height": 56
+      }
+    },
+    {
+      "width": 768,
+      "height": 1024,
+      "scrollWidth": 768,
+      "mainAction": {
+        "x": 32,
+        "y": 489.78125,
+        "width": 286,
+        "height": 56
+      }
+    },
+    {
+      "width": 896,
+      "height": 900,
+      "scrollWidth": 896,
+      "mainAction": {
+        "x": 32,
+        "y": 489.78125,
+        "width": 286,
+        "height": 56
+      }
+    },
+    {
+      "width": 1120,
+      "height": 900,
+      "scrollWidth": 1120,
+      "mainAction": {
+        "x": 32,
+        "y": 513.484375,
+        "width": 286,
+        "height": 56
+      }
+    },
+    {
+      "width": 1440,
+      "height": 900,
+      "scrollWidth": 1440,
+      "mainAction": {
+        "x": 96,
+        "y": 568.765625,
+        "width": 286,
+        "height": 56
+      }
+    }
+  ],
+  "accessibility": [
+    {
+      "width": 390,
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "nodes": 2
+        }
+      ]
+    },
+    {
+      "width": 1440,
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "nodes": 2
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "externalRequests": []
+}
