@@ -3,12 +3,12 @@
   <path d="m67 73 17-16 17 16M67 85l17-16 17 16M67 97l17-16 17 16" fill="none" stroke="#14282d" stroke-width="5"/>
   <g font-family="'Manrope Variable', Arial, sans-serif" fill="#14282d">
     <text x="119" y="89" font-size="32" font-weight="700" letter-spacing="-1.5">LeadNest</text>
-    <text x="64" y="263" font-size="84" font-weight="700" letter-spacing="-5">More jobs.</text>
-    <text x="64" y="354" font-size="84" font-weight="700" letter-spacing="-5" fill="#5d6468">Less chasing.</text>
-    <text x="68" y="413" font-size="24">Qualified leads. Built for the trades.</text>
-    <rect x="68" y="470" width="343" height="64" rx="6" fill="#ff834a"/>
-    <text x="92" y="511" font-size="22" font-weight="700">The Playbook · $9.00</text>
-    <path d="M364 502h22m-8-8 8 8-8 8" fill="none" stroke="#14282d" stroke-width="2"/>
+    <text x="64" y="263" font-size="84" font-weight="700" letter-spacing="-5" fill="#5d6468">LeadNest —</text>
+    <text x="64" y="354" font-size="84" font-weight="700" letter-spacing="-5">The Playbook</text>
+    <text x="68" y="413" font-size="24">Your first contractor client live in 7 days.</text>
+    <rect x="68" y="470" width="383" height="64" rx="6" fill="#ff834a"/>
+    <text x="92" y="511" font-size="22" font-weight="700">Get the Playbook · $9.00</text>
+    <path d="M382 502h22m-8-8 8 8-8 8" fill="none" stroke="#14282d" stroke-width="2"/>
   </g>
   <rect x="778" y="50" width="365" height="530" fill="#efefe5"/>
   <circle cx="961" cy="315" r="170" fill="none" stroke="#deded2"/>

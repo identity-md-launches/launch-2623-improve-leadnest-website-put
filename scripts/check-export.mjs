@@ -53,24 +53,26 @@ try {
     assert(await noOverflow(page), `Overflow at ${width}`);
     assert(await page.evaluate(() => [400, 600, 700].every(weight => document.fonts.check(`${weight} 16px "Manrope Variable"`))));
     const buttons = await page.locator('a.button').evaluateAll(links => links.map(link => link.href));
-    assert(buttons.length === 3 && buttons.every(url => url === buyUrl));
+    assert(buttons.length === 4 && buttons.every(url => url === buyUrl));
     for (const link of await page.locator('a[href^="#"]').all()) {
       const href = await link.getAttribute('href');
       if (href !== '#') assert(await page.locator(href).count(), `Missing target ${href}`);
     }
-    const box = await page.locator('.hero-product .button').boundingBox();
-    const product = await page.locator('#playbook h2').boundingBox();
+    const box = await page.locator('.hero-buy .button').boundingBox();
+    const product = await page.locator('#hero-title').boundingBox();
+    const sample = await page.locator('#sample-title').boundingBox();
     if (width === 390) {
       assert(box.y >= 0 && box.y + box.height <= height, 'Main action is below the first screen');
       assert(product.y >= 0 && product.y + product.height <= height, 'Product is below the first screen');
+      assert(sample.y + sample.height <= height, 'Sample is below the first screen');
       await page.screenshot({ path: `${output}/mobile-390.png` });
       await page.screenshot({ path: `${output}/mobile-full.png`, fullPage: true });
     }
     if (width === 1440) await page.screenshot({ path: `${output}/desktop-1440.png`, fullPage: true });
     report.viewports.push({ width, height, scrollWidth: await page.evaluate(() => document.documentElement.scrollWidth), mainAction: box });
   }
-  pass('Seven viewport layouts, loaded local font, valid navigation targets, exact checkout URLs');
-  pass('Product, price and complete primary action on the first screen at 390 × 844');
+  pass('Seven viewport layouts, loaded local font, valid navigation targets, four exact checkout URLs');
+  pass('Product name, price, complete primary action and the sample heading on the first screen at 390 × 844');
 
   for (const link of await page.locator('.desktop-nav a').all()) {
     const href = await link.getAttribute('href');
@@ -118,8 +120,8 @@ try {
   await page.keyboard.press('Enter');
   assert.equal(await page.evaluate(() => document.activeElement.id), 'main');
   await page.keyboard.press('Tab');
-  assert(await page.locator('.hero-product .button').evaluate(el => el === document.activeElement));
-  const outline = await page.locator('.hero-product .button').evaluate(el => ({ width: getComputedStyle(el).outlineWidth, style: getComputedStyle(el).outlineStyle }));
+  assert(await page.locator('.hero-buy .button').evaluate(el => el === document.activeElement));
+  const outline = await page.locator('.hero-buy .button').evaluate(el => ({ width: getComputedStyle(el).outlineWidth, style: getComputedStyle(el).outlineStyle }));
   assert.equal(outline.style, 'solid');
   assert.equal(outline.width, '3px');
   await page.screenshot({ path: `${output}/keyboard-focus.png` });
@@ -138,7 +140,7 @@ try {
 
   await page.evaluate(() => { document.documentElement.style.fontSize = '200%'; });
   assert(await noOverflow(page));
-  assert(await page.locator('.hero-product .button').isVisible());
+  assert(await page.locator('.hero-buy .button').isVisible());
   pass('200% root text enlargement reflows at 390px (not native browser zoom)');
   await page.goto(base);
   await page.evaluate(() => { document.documentElement.dir = 'rtl'; });
@@ -151,7 +153,7 @@ try {
 
   // Check the actual outbound action while keeping the payment service outside this test.
   await page.route(buyUrl, route => route.fulfill({ contentType: 'text/html', body: '<title>Checkout navigation verified</title><p>Checkout route intercepted by validation.</p>' }));
-  await page.locator('.hero-product .button').click();
+  await page.locator('.hero-buy .button').click();
   assert.equal(page.url(), buyUrl);
   pass('Primary purchase action navigates to the exact provided checkout URL (intercepted)');
   assert.equal(report.externalRequests.length, 0);
@@ -176,7 +178,7 @@ try {
       assert(await webPage.locator('.faq-list details').first().evaluate(el => el.open));
       await webPage.route(buyUrl, route => route.fulfill({ body: 'Checkout route intercepted by validation.' }));
       await webPage.goto(base);
-      await webPage.locator('.hero-product .button').click();
+      await webPage.locator('.hero-buy .button').click();
       assert.equal(webPage.url(), buyUrl);
       pass('WebKit mobile FAQ and checkout interactions');
     } finally { await safari.close(); }

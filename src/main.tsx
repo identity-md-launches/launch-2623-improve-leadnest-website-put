@@ -23,27 +23,46 @@ function NestMark({ className = '' }: { className?: string }) {
   return <svg className={`nest-mark ${className}`} width="36" height="36" viewBox="0 0 40 40" fill="none" aria-hidden="true"><path d="m5 20 15-14 15 14M5 28l15-14 15 14M5 36l15-14 15 14" stroke="currentColor" strokeWidth="4" strokeLinecap="square" strokeLinejoin="miter" /></svg>;
 }
 
-function BuyLink({ compact = false, className = '' }: { compact?: boolean; className?: string }) {
-  return <a className={`${compact ? 'button button-outline' : 'button button-primary'} ${className}`} href={BUY_URL}>
-    <span>Get the Playbook{!compact && <span className="button-price"> · $9.00</span>}</span><Icon name="arrow" />
+type Product = { name: string; price: string; buyUrl: string; outcome: string };
+
+// The catalogue, in page order. The first product leads the page; any others list below it.
+const products: Product[] = [
+  { name: 'LeadNest — The Playbook', price: '$9.00', buyUrl: BUY_URL, outcome: 'Launch an AI lead-capture service for contractors and get your first client live in 7 days.' },
+];
+const [featured, ...otherProducts] = products;
+
+function BuyLink({ compact = false, className = '', product = featured }: { compact?: boolean; className?: string; product?: Product }) {
+  const label = product === featured ? 'Get the Playbook' : `Get ${product.name}`;
+  return <a className={`${compact ? 'button button-outline' : 'button button-primary'} ${className}`} href={product.buyUrl}>
+    <span>{label}{!compact && <span className="button-price"> · {product.price}</span>}</span><Icon name="arrow" />
   </a>;
 }
 
-function BookArtwork() {
-  return <figure className="book-scene" aria-label="LeadNest The Playbook, a digital guide for service contractors. Illustrative cover.">
-    <svg className="scene-lines" viewBox="0 0 580 580" fill="none" aria-hidden="true"><circle cx="290" cy="290" r="250" /><circle cx="290" cy="290" r="185" /><path d="M0 290h580M290 0v580" /><path d="M40 40h500v500H40z" strokeDasharray="3 8" /></svg>
-    <div className="book" aria-hidden="true">
-      <div className="book-spine" />
-      <div className="book-cover">
-        <div className="cover-brand"><NestMark /><span>LeadNest</span></div>
-        <div className="cover-title">The<br />Playbook<span className="cover-dot">.</span></div>
-        <svg className="cover-art" viewBox="0 0 300 220" fill="none" aria-hidden="true"><path d="m-20 160 170-150 170 150M-20 205 150 55l170 150M-20 250 150 100l170 150" stroke="currentColor" strokeWidth="25" /><path d="m70 230 80-70 80 70" stroke="currentColor" strokeWidth="25" /></svg>
-        <div className="cover-bottom"><span>Built for the trades.</span><span>01</span></div>
-      </div>
-      <div className="book-pages" />
-    </div>
-    <figcaption><span className="caption-line" />Digital playbook. Real-world ambition.</figcaption>
-  </figure>;
+// Taken from the report's public preview at getnightshift.tech (outline and opening).
+const contents: { number?: number; title: string }[] = [
+  { number: 1, title: 'The short answer' },
+  { number: 2, title: 'What you are selling' },
+  { number: 3, title: 'Pick one niche today' },
+  { number: 4, title: 'Same-day action plan (Day 0)' },
+  { number: 5, title: 'Build checklist: first client live in 7 days' },
+  { number: 6, title: 'Unit economics: what one client costs and earns' },
+  { title: 'The ROI pitch to the contractor (use their numbers)' },
+  { number: 7, title: 'Finding the first 10 customers' },
+  { number: 8, title: 'Compliance: do not skip this section' },
+  { number: 9, title: 'Metrics, budget and cash rules' },
+];
+
+function Sample() {
+  return <section className="sample" id="sample" aria-labelledby="sample-title">
+    <div className="sample-heading"><h2 id="sample-title">Look inside</h2><p>From the report’s free preview</p></div>
+    <ol className="sample-contents">{contents.map(item => <li key={item.title} className={item.number ? '' : 'sample-sub'}>
+      <span className="sample-number">{item.number ? String(item.number).padStart(2, '0') : ''}</span><span>{item.title}</span>
+    </li>)}</ol>
+    <blockquote className="sample-quote">
+      <p>“Getting started with an AI lead-capture and follow-up service for roofing, plumbing, HVAC and property-service contractors, priced at $500–$1,500/month plus $500–$2,000 setup.”</p>
+    </blockquote>
+    <p className="sample-more">The full report has 17 sections. Research dated 20 October 2026.</p>
+  </section>;
 }
 
 const trades: { name: string; icon: IconName; detail: string }[] = [
@@ -60,11 +79,11 @@ const steps = [
 ];
 
 const faqs = [
-  { question: 'Who is LeadNest for?', answer: 'Roofing, plumbing, HVAC and property service contractors who want more qualified opportunities. Our lead-generation service is for businesses investing $500–$1,500 per month in automated lead generation.' },
-  { question: 'What am I buying for $9.00?', answer: 'LeadNest — The Playbook is the introductory guide to our approach to lead generation for service contractors. The $9.00 purchase is for the Playbook; an ongoing lead-generation service is separate.' },
-  { question: 'Is the Playbook a monthly subscription?', answer: 'No. The Playbook is a one-time $9.00 purchase. It does not enroll you in the monthly lead-generation service.' },
-  { question: 'How do I buy the Playbook?', answer: 'Select “Get the Playbook” to open our checkout at getnightshift.tech. You can review the purchase and complete payment there.' },
-  { question: 'Does the Playbook guarantee new jobs?', answer: 'No. The Playbook is a guide, and results depend on your business, market and how you put the approach into practice.' },
+  { question: 'Who is the Playbook for?', answer: 'Anyone starting an AI lead-capture and follow-up service for roofing, plumbing, HVAC and property-service contractors: the businesses that pay $500–$1,500/mo for automated lead generation.' },
+  { question: 'What do I get for $9.00?', answer: 'A 3,567-word Markdown report in 17 sections. It covers what you are selling, picking a niche, a same-day action plan, a 7-day build checklist, unit economics and the ROI pitch, finding your first 10 customers, compliance, and metrics and cash rules.' },
+  { question: 'Is it a subscription?', answer: 'No. The Playbook is a one-time $9.00 purchase, with nothing to renew or cancel.' },
+  { question: 'How do I buy and download it?', answer: 'Select “Get the Playbook” to open the checkout at getnightshift.tech. Payment is $9.00 in USDC on Base. Once it settles you get a download link for the report, valid for 7 days.' },
+  { question: 'Are the numbers in it guaranteed?', answer: 'No. It is a researched guide, dated 20 October 2026. Prices, laws and vendor terms change, so the report marks each figure to re-check with [verify] before you quote it to a client.' },
 ];
 
 function App() {
@@ -73,27 +92,32 @@ function App() {
     <header className="site-header wrap">
       <a className="brand" href="#" aria-label="LeadNest home"><NestMark /><span>LeadNest</span></a>
       <nav className="desktop-nav" aria-label="Main navigation">
-        <a href="#approach">The approach</a><a href="#playbook">The Playbook</a><a href="#faq">FAQs</a>
+        <a href="#sample">Look inside</a><a href="#trades">The trades</a><a href="#faq">FAQs</a>
       </nav>
       <a className="mobile-faq" href="#faq">FAQs</a>
       <BuyLink compact className="header-buy" />
     </header>
 
     <main id="main" tabIndex={-1}>
-      <section className="hero wrap" aria-labelledby="hero-title">
+      <section className="hero wrap" id="playbook" aria-labelledby="hero-title">
         <div className="hero-copy">
-          <h1 id="hero-title">More jobs.<br /><span>Less chasing.</span></h1>
-          <p className="hero-description">Qualified, appointment-ready leads, 24/7.<br className="desktop-break" /> Built for the trades.</p>
-          <div className="hero-product" id="playbook">
-            <h2>LeadNest — The Playbook</h2>
-            <p>A practical starting point for better lead generation.</p>
+          <h1 id="hero-title"><span>LeadNest —</span> The Playbook</h1>
+          <p className="hero-outcome">{featured.outcome}</p>
+          <div className="hero-buy">
             <BuyLink />
-            <p className="purchase-note"><Icon name="check" />One-time purchase, no subscription.</p>
+            <p className="purchase-note"><Icon name="check" />One-time {featured.price}. Download right after payment.</p>
           </div>
+          <ul className="hero-facts" aria-label="What you get">
+            <li><strong>3,567</strong> words</li><li><strong>17</strong> sections</li><li><strong>7-day</strong> launch checklist</li>
+          </ul>
         </div>
-        <BookArtwork />
-        <div className="hero-footnote"><span>More time on the tools, less on the phone.</span><a href="#trades">Built for businesses like yours<Icon name="arrow" /></a></div>
+        <Sample />
       </section>
+
+      {otherProducts.length > 0 && <section className="more-products wrap" id="products" aria-labelledby="products-title">
+        <h2 id="products-title">More from LeadNest</h2>
+        <ul className="product-list">{otherProducts.map(product => <li key={product.name}><div><h3>{product.name}</h3><p>{product.outcome}</p></div><BuyLink product={product} /></li>)}</ul>
+      </section>}
 
       <section className="trades-section" id="trades" aria-labelledby="trades-title">
         <div className="wrap">
@@ -104,7 +128,7 @@ function App() {
 
       <section className="approach-section" id="approach" aria-labelledby="approach-title">
         <div className="wrap approach-layout">
-          <div className="approach-intro"><h2 id="approach-title">Let the leads come to you.</h2><p>We deliver qualified, appointment-ready leads 24/7 so you close more high-value jobs.</p><a className="text-link" href="#playbook">Start with the Playbook<Icon name="arrow" /></a></div>
+          <div className="approach-intro"><h2 id="approach-title">Let the leads come to you.</h2><p>We deliver qualified, appointment-ready leads 24/7 so you close more high-value jobs.</p><BuyLink className="approach-buy" /></div>
           <ol className="steps">{steps.map((step, i) => <li key={step.title}><span className="step-number">0{i + 1}</span><div><h3>{step.title}</h3><p>{step.body}</p></div></li>)}</ol>
         </div>
       </section>
@@ -115,7 +139,7 @@ function App() {
       </section>
 
       <section className="closing-section wrap" aria-labelledby="closing-title">
-        <div className="closing-copy"><NestMark /><div><h2 id="closing-title">Make room for your next job.</h2><p>Start with the Playbook. Put the approach to work.</p></div></div><BuyLink />
+        <div className="closing-copy"><NestMark /><div><h2 id="closing-title">Start your lead service this week.</h2><p>One report, 17 sections, {featured.price} once.</p></div></div><BuyLink />
       </section>
     </main>
 

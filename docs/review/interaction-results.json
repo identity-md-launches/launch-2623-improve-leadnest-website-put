@@ -1,7 +1,7 @@
 {
   "passed": [
-    "Seven viewport layouts, loaded local font, valid navigation targets, exact checkout URLs",
-    "Product, price and complete primary action on the first screen at 390 × 844",
+    "Seven viewport layouts, loaded local font, valid navigation targets, four exact checkout URLs",
+    "Product name, price, complete primary action and the sample heading on the first screen at 390 × 844",
     "All three desktop navigation links scroll to the intended sections",
     "Mobile FAQ navigation",
     "All five FAQs open and close using keyboard, and open using pointer; answers reflow",
@@ -15,7 +15,7 @@
     "No console errors, missing local resources or external runtime requests"
   ],
   "limitations": [
-    "WebKit could not launch: browserType.launch:  ╔══════════════════════════════════════════════════════╗ ║ Host system is missing dependencies to run browsers. ║ ║ Missing libraries:                                   ║ ║     libgstreamer-1.0.so.0                            ║ ║     libgtk-4.so.1                                    ║",
+    "WebKit could not launch: browserType.launch:  ╔══════════════════════════════════════════════════════╗ ║ Host system is missing dependencies to run browsers. ║ ║ Missing libraries:                                   ║ ║     libgtk-4.so.1                                    ║ ║     libgraphene-1.0.so.0                             ║",
     "No physical phone, native screen reader, native 200% browser zoom, real payment or post-purchase fulfillment was tested."
   ],
   "viewports": [
@@ -25,7 +25,7 @@
       "scrollWidth": 320,
       "mainAction": {
         "x": 20,
-        "y": 394.171875,
+        "y": 321.8125,
         "width": 280,
         "height": 56
       }
@@ -36,7 +36,7 @@
       "scrollWidth": 390,
       "mainAction": {
         "x": 20,
-        "y": 371.78125,
+        "y": 321.8125,
         "width": 350,
         "height": 56
       }
@@ -47,7 +47,7 @@
       "scrollWidth": 672,
       "mainAction": {
         "x": 20,
-        "y": 371.78125,
+        "y": 321.8125,
         "width": 632,
         "height": 56
       }
@@ -58,7 +58,7 @@
       "scrollWidth": 768,
       "mainAction": {
         "x": 32,
-        "y": 489.78125,
+        "y": 399.8125,
         "width": 286,
         "height": 56
       }
@@ -69,7 +69,7 @@
       "scrollWidth": 896,
       "mainAction": {
         "x": 32,
-        "y": 489.78125,
+        "y": 399.8125,
         "width": 286,
         "height": 56
       }
@@ -80,7 +80,7 @@
       "scrollWidth": 1120,
       "mainAction": {
         "x": 32,
-        "y": 513.484375,
+        "y": 451.09375,
         "width": 286,
         "height": 56
       }
@@ -91,7 +91,7 @@
       "scrollWidth": 1440,
       "mainAction": {
         "x": 96,
-        "y": 568.765625,
+        "y": 508.375,
         "width": 286,
         "height": 56
       }
@@ -101,24 +101,12 @@
     {
       "width": 390,
       "violations": [],
-      "incomplete": [
-        {
-          "id": "color-contrast",
-          "impact": "serious",
-          "nodes": 2
-        }
-      ]
+      "incomplete": []
     },
     {
       "width": 1440,
       "violations": [],
-      "incomplete": [
-        {
-          "id": "color-contrast",
-          "impact": "serious",
-          "nodes": 2
-        }
-      ]
+      "incomplete": []
     }
   ],
   "errors": [],
